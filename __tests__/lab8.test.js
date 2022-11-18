@@ -56,15 +56,16 @@ describe('Basic user flow for Website', () => {
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
     // You can use page.evaluate() to run a function in the context of the element you grabbed
     // ( checkout page.evaluate() in the docs )
-    const shadowRoot = await prodItem.getProperty('shadowRoot')
-    let addButton = await shadowRoot.$$('button')[0];
+    const shadowRoot = await prodItem.getProperty('shadowRoot');
+    let addButton = await shadowRoot.$('button');
 
     // Once you have the button, you can click it and check the innerText property of the button.
     // Once you have the innerText property, use innerText.jsonValue() to get the text value of it
-    let text = addButton.click().getProperty('innerText').jsonValue();
+    addButton.click;
+    let innerText = await addButton.getProperty('innerText');
+    let text = innerText.jsonValue;
 
-
-    console.log(text);
+    console.log(innerText);
   }, 2500);
 
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
@@ -73,8 +74,17 @@ describe('Basic user flow for Website', () => {
     console.log('Checking number of items in cart on screen...');
     // TODO - Step 3
     // Query select all of the <product-item> elements, then for every single product element
-    // get the shadowRoot and query select the button inside, and click on it.
-    // Check to see if the innerText of #cart-count is 20
+    const prodItems = await page.$$('prod-items');
+    
+    for (let i = 0; i < prodItems.length; i++) {
+      // get the shadowRoot and query select the button inside, and click on it.
+      // Check to see if the innerText of #cart-count is 20
+      const shadowRoot =  await item.getProperty('shadowRoot');
+     
+
+      
+    };
+
   }, 10000);
 
   // Check to make sure that after you reload the page it remembers all of the items in your cart
