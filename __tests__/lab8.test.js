@@ -2,7 +2,7 @@ describe('Basic user flow for Website', () => {
   // First, visit the lab 8 website
   beforeAll(async () => {
     //updating the URL in lab8.test.js to your local URL from your Live Server
-    await page.goto('http://127.0.0.1:5500/index.html'); 
+    await page.goto('http://127.0.0.1:5500/Lab8_Starter/'); 
   });
 
   // Next, check to make sure that all 20 <product-item> elements have loaded
@@ -24,23 +24,11 @@ describe('Basic user flow for Website', () => {
     let data, plainValue;
     // Query select all of the <product-item> elements
     const prodItems = await page.$$('product-item');
-    console.log(`Checking product item 1/${prodItems.length}`);
-    // Grab the .data property of <product-items> to grab all of the json data stored inside
-    data = await prodItems[0].getProperty('data');
-    // Convert that property to JSON
-    plainValue = await data.jsonValue();
-    // Make sure the title, price, and image are populated in the JSON
-    if (plainValue.title.length == 0) { allArePopulated = false; }
-    if (plainValue.price.length == 0) { allArePopulated = false; }
-    if (plainValue.image.length == 0) { allArePopulated = false; }
-    // Expect allArePopulated to still be true
-    expect(allArePopulated).toBe(true);
-
+    
     // TODO - Step 1
     // Right now this function is only checking the first <product-item> it found, make it so that
     // it checks every <product-item> it found
 
-    //check every <product-item> found
     for (let i = 0; i < prodItems.length; i++) {
       console.log(`Checking product item ${i+1}/${prodItems.length}`);
       data = await prodItems[i].getProperty('data');
@@ -50,8 +38,10 @@ describe('Basic user flow for Website', () => {
       if (plainValue.image.length == 0) { allArePopulated = false; }
     }
     expect(allArePopulated).toBe(true);
+
+
   });
-  }, 10000);
+  }, 20000);
 
 
 
@@ -66,13 +56,15 @@ describe('Basic user flow for Website', () => {
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
     // You can use page.evaluate() to run a function in the context of the element you grabbed
     // ( checkout page.evaluate() in the docs )
-
+    const shadowRoot = await prodItem.getProperty('shadowRoot')
+    let addButton = await shadowRoot.$$('button')[0];
 
     // Once you have the button, you can click it and check the innerText property of the button.
     // Once you have the innerText property, use innerText.jsonValue() to get the text value of it
+    let text = addButton.click().getProperty('innerText').jsonValue();
 
 
-    
+    console.log(text);
   }, 2500);
 
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
@@ -127,4 +119,3 @@ describe('Basic user flow for Website', () => {
     // TODO - Step 8
     // At this point he item 'cart' in localStorage should be '[]', check to make sure it is
   });
-});
