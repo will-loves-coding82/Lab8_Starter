@@ -24,9 +24,8 @@ describe("Basic user flow for Website", () => {
    
   // Check to make sure that all 20 <product-item> elements have data in them
   it("Make sure <product-item> elements are populated", async () => {
-    console.log(
-      "Checking to make sure <product-item> elements are populated..."
-    );
+    //console.log("Checking to make sure <product-item> elements are populated...");
+
     // Start as true, if any don't have data, swap to false
     let allArePopulated = true;
     let data, plainValue;
@@ -152,7 +151,7 @@ describe("Basic user flow for Website", () => {
 
     //console.log("Checking number of items in cart on screen...");
     const prodItems = await page.$$("product-item");
-    
+
     for (let i = 0; i < prodItems.length; i++) {
       //console.log(`Checking product item ${i + 1}/${prodItems.length}`);
       const shadowRootPro = await prodItems[i].getProperty("shadowRoot");
@@ -165,7 +164,7 @@ describe("Basic user flow for Website", () => {
     const cartCountText = await innerText.jsonValue();
     expect(cartCountText).toBe("0");
 
-  }, 10000);
+  }, 20000);
 
   // Checking to make sure that it remembers us removing everything from the cart
   // after we refresh the page
@@ -199,7 +198,7 @@ describe("Basic user flow for Website", () => {
   // Checking to make sure that localStorage for the cart is as we'd expect for the
   // cart being empty
   it("Checking the localStorage to make sure cart is correct", async () => {
-    console.log("Checking the localStorage...");
+    //console.log("Checking the localStorage...");
     // TODO - Step 8
     // At this point the item 'cart' in localStorage should be '[]', check to make sure it is
     const cart = await page.evaluate(() => { return localStorage.getItem("cart")});
