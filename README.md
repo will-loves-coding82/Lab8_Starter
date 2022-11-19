@@ -17,3 +17,10 @@ Answer:
 No, E2E testing's primary goal is to ensure that the app functions properly by emulating user behavior/actions. 
 E2E testing does not care how the app is composed or programmed. 
 
+
+### 3) Would you use a unit test to test the “message” feature of a messaging application? Why or why not? For this question, assume the “message” feature allows a user to write and send a message to another user.
+Answer:
+
+
+### 4) Would you use a unit test to test the “max message length” feature of a messaging application? Why or why not? For this question, assume the “max message length” feature prevents the user from typing more than 80 characters.
+Answer:
