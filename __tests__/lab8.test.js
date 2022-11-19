@@ -75,17 +75,14 @@ describe("Basic user flow for Website", () => {
     const prodItem = await page.$("product-item");
 
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
-
     //grab the shadowRoot of prodItem, then query a button from that shadowRoot
     const shadowRootPro = await prodItem.getProperty("prodItem.shadowRoot");
     const buttonSha = await shadowRootPro.$("button");
     // You can use page.evaluate() to run a function in the context of the element you grabbed
-    // use page.evaluate() to run a function in the context of buttonSha
     const buttonShaText = await page.evaluate(
       (buttonSha) => buttonSha.textContent,
       buttonSha
     );
-
     // ( checkout page.evaluate() in the docs )
     expect(buttonShaText).toBe("Add to Cart");
 
@@ -99,9 +96,7 @@ describe("Basic user flow for Website", () => {
     expect(buttonShaText2).toBe("Remove from Cart");
 
     // Once you have the innerText property, use innerText.jsonValue() to get the text value of it
-    // use innerText.jsonValue() to get the value of buttonShaText2
-    const buttonShaText3 = await buttonSha.innerText.jsonValue();
-    expect(buttonShaText3).toBe("Remove from Cart");
+      
   }, 2500);
 
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
