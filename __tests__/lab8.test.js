@@ -7,7 +7,7 @@ describe("Basic user flow for Website", () => {
 
   // Next, check to make sure that all 20 <product-item> elements have loaded
   it("Initial Home Page - Check for 20 product items", async () => {
-    console.log("Checking for 20 product items...");
+    //console.log("Checking for 20 product items...");
 
     // Query select all of the <product-item> elements and return the length of that array
     
@@ -32,7 +32,7 @@ describe("Basic user flow for Website", () => {
     let data, plainValue;
     // Query select all of the <product-item> elements
     const prodItems = await page.$$("product-item");
-    console.log(`Checking product item 1/${prodItems.length}`);
+    //console.log(`Checking product item 1/${prodItems.length}`);
     // Grab the .data property of <product-items> to grab all of the json data stored inside
     data = await prodItems[0].getProperty("data");
     // Convert that property to JSON
@@ -81,7 +81,7 @@ describe("Basic user flow for Website", () => {
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
   // number in the top right has been correctly updated
   it('Checking number of items in cart on screen', async () => {
-    console.log('Checking number of items in cart on screen...');
+    //console.log('Checking number of items in cart on screen...');
     // Step 3: Query select all of the <product-item> elements, then for every single product element
     const prodItems = await page.$$('product-item');
 
@@ -141,21 +141,25 @@ describe("Basic user flow for Website", () => {
     const cart = await page.evaluate(() => { return localStorage.getItem("cart")});
     expect(cart).toBe("[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]");
   });
+  
 
   // Checking to make sure that if you remove all of the items from the cart that the cart
   // number in the top right of the screen is 0
   it("Checking number of items in cart on screen after removing from cart", async () => {
-    //console.log("Checking number of items in cart on screen...");
     // TODO - Step 6
     // Go through and click "Remove from Cart" on every single <product-item>, just like above.
     // Once you have, check to make sure that #cart-count is now 0
+
+    //console.log("Checking number of items in cart on screen...");
     const prodItems = await page.$$("product-item");
+    
     for (let i = 0; i < prodItems.length; i++) {
       //console.log(`Checking product item ${i + 1}/${prodItems.length}`);
       const shadowRootPro = await prodItems[i].getProperty("shadowRoot");
       const buttonSha = await shadowRootPro.$("button");
       await buttonSha.click();
     }
+
     const cartCount = await page.$("#cart-count");
     const innerText = await cartCount.getProperty("innerText");
     const cartCountText = await innerText.jsonValue();
@@ -176,13 +180,12 @@ describe("Basic user flow for Website", () => {
 
     for (let i = 0; i < prodItems.length; i++) {
 
-      console.log(`Checking product item ${i + 1}/${prodItems.length}`);
+      //console.log(`Checking product item ${i + 1}/${prodItems.length}`);
       const shadowRootPro = await prodItems[i].getProperty("shadowRoot");
       const buttonSha = await shadowRootPro.$("button");
 
       const buttonShaText = await buttonSha.getProperty("innerText")
       const buttonShaTextValue = await buttonShaText.jsonValue();
-      
       expect(buttonShaTextValue).toBe("Add to Cart");
     }
 
