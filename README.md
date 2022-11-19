@@ -20,7 +20,8 @@ E2E testing does not care how the app is composed or programmed.
 
 ### 3) Would you use a unit test to test the “message” feature of a messaging application? Why or why not? For this question, assume the “message” feature allows a user to write and send a message to another user.
 Answer:
-
+No. This would be more of a E2E test case since we would want to ensure that the user can send a message and the recipient successfully retrieves it. 
 
 ### 4) Would you use a unit test to test the “max message length” feature of a messaging application? Why or why not? For this question, assume the “max message length” feature prevents the user from typing more than 80 characters.
 Answer:
+Yes, this is involved in testing the internal functionality of a single feature or unit rather than the relationship between other parts of the app. 
